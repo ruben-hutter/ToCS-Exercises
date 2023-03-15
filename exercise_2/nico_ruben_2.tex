@@ -64,9 +64,10 @@ We did the tutorial, but are so kind to upload only the pdf without all the
 	As you can see, we end up at $q_2$ which actually is a, and the only, final state of the DFA $M$.
 
 	\item
-	$M$ recognizes every language that has at least a "b" in it. So the minimal length of the WORDS
-	of the language has to be 1, since you have to reach $q_2$ from $q_0$. At every NODE you have always
-	the possibility to add an "a" or a "b", going left or right from your current position.
+	$M$ recognizes every language that has an odd number of "b"'s in it (at least one) and that has 0 or
+	an even number of "a"'s. So the minimal length of the WORDS of the language has to be 1, since you
+	have to reach $q_2$ from $q_0$. At every NODE you have always the possibility to add an "a" or a "b",
+	going left or right from your current position.
 
 \end{enumerate}
 
