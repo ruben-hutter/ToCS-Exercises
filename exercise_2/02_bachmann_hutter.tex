@@ -41,19 +41,19 @@
 \begin{document}
 
 \section*{Exercise \homeworkNumber.1}
-We did the tutorial, but are so kind to upload only the pdf without all the
+We did the tutorial, but are so kind to only upload the pdf without all the
 .jff files ;)
 
 \section*{Exercise \homeworkNumber.2}
 \begin{enumerate}[(a)]
 	\item
-	This is the graphical representation of $M = \left \langle
+	This is the graphical representation of the DFA $M = \left \langle
 		\set{q_0, q_1, q_2, q_3}, \set{a, b}, \delta,\; q_0, \set{q_2}
 		\right \rangle$.
 	\begin{figure}[H]
 		\includegraphics[width=\linewidth]{ex2a.png}
 		\centering
-		\caption{Graphical representation of $M$}
+		\caption{Graphical representation of DFA $M$}
 	\end{figure}
 
 	\item
@@ -61,13 +61,11 @@ We did the tutorial, but are so kind to upload only the pdf without all the
 	$$
 	q_0 \to q_1 \to q_3 \to q_1 \to q_0 \to q_2
 	$$
-	As you can see, we end up at $q_2$ which actually is a, and the only, final state of the DFA $M$.
+	As you can see, we end up at $q_2$ which is actually one, and the only, final state of the DFA $M$.
 
 	\item
 	$M$ recognizes every language that has an odd number of "b"'s in it (at least one) and that has 0 or
-	an even number of "a"'s. So the minimal length of the WORDS of the language has to be 1, since you
-	have to reach $q_2$ from $q_0$. At every NODE you have always the possibility to add an "a" or a "b",
-	going left or right from your current position.
+	an even number of "a"'s. So the minimal length of the words of the language has to be 1, since you have to reach $q_2$ from $q_0$.
 
 \end{enumerate}
 
@@ -89,7 +87,7 @@ We did the tutorial, but are so kind to upload only the pdf without all the
 	$q_2$, which is a final state of the NFA.
 	
 	After the first 0 we end up at $q_2$, from which we can go back to $q_0$ (with $\epsilon$) and then
-	go to $q_1$ with 1. The following SERIES 010 we do by staying on $q_1$; then we go to $q_2$ with 1
+	go to $q_1$ with 1. The following elements 010 we do by staying on $q_1$; then we go to $q_2$ with 1
 	and we end on $q_2$ with the last 0 passing by $q_0$.
 
 	\item
