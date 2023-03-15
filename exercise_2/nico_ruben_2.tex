@@ -76,7 +76,7 @@ We did the tutorial, but are so kind to upload only the pdf without all the
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{ex3.png}
 	\centering
-	\caption{The DFA for the language $L = \set{a^x b^y c^z \mid x \ge 1,\; y \ge 0,\; z \ge 2}$}
+	\caption{The DFA for the language $L = \set{a^x \, b^y \, c^z \mid x \ge 1,\; y \ge 0,\; z \ge 2}$}
 \end{figure}
 
 \clearpage
@@ -86,9 +86,13 @@ We did the tutorial, but are so kind to upload only the pdf without all the
 	\item
 	Yes, because if we follow the states given by the word 0101010 we end up at
 	$q_2$, which is a final state of the NFA.
+	
+	After the first 0 we end up at $q_2$, from which we can go back to $q_0$ (with $\epsilon$) and then
+	go to $q_1$ with 1. The following SERIES 010 we do by staying on $q_1$; then we go to $q_2$ with 1
+	and we end on $q_2$ with the last 0 passing by $q_0$.
 
 	\item
-	This is the DFA equivalent to the NFA on the Exercise sheet.
+	This is the DFA equivalent to the NFA on the Exercise sheet:
 	\begin{figure}[H]
 		\includegraphics[width=\linewidth]{ex4b.png}
 		\centering
