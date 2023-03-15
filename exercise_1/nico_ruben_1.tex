@@ -1,0 +1,152 @@
+%% General definitions
+\documentclass{article} %% Determines the general format.
+\usepackage{a4wide} %% paper size: A4.
+\usepackage[utf8]{inputenc} %% This file is written in UTF-8.
+%% Some editors on Windows cannot save files in UTF-8.
+%% If there is a problem with special characters not showing up
+%% correctly, try switching "utf8" to "latin1" (ISO 8859-1).
+\usepackage[T1]{fontenc} %% Format of hte resulting PDF file.
+\usepackage{fancyhdr} %% Package to create a header on each page.
+\usepackage{lastpage} %% Used for "Page X of Y" in the header.
+											%% For this to work, you have to call pdflatex twice.
+\usepackage{enumerate} %% Used to change the style of enumerations (see below).
+
+\usepackage{amssymb} %% Definitions for math symbols.
+\usepackage{amsmath} %% Definitions for math symbols.
+\usepackage{amsthm}
+\usepackage{braket}
+
+\usepackage{tikz}  %% Pagacke to create graphics (graphs, automata, etc.)
+\usetikzlibrary{automata} %% Tikz library to draw automata
+\usetikzlibrary{arrows}   %% Tikz library for nicer arrow heads
+
+
+%% Left side of header
+\lhead{\course\\\semester\\Exercise \homeworkNumber}
+%% Right side of header
+\rhead{\authorname\\Page \thepage\ of \pageref{LastPage}}
+%% Height of header
+\usepackage[headheight=36pt]{geometry}
+%% Page style that uses the header
+\pagestyle{fancy}
+
+\newcommand{\authorname}{Nico Bachmann\\Ruben Hutter}
+\newcommand{\semester}{Spring semester 2023}
+\newcommand{\course}{Theory of Computer Science}
+\newcommand{\homeworkNumber}{1}
+
+
+\begin{document}
+
+\section*{Exercise \homeworkNumber.1}
+\begin{enumerate}[(a)]
+	\item
+	At first we write down our different sets of the Domain. Then we combine them
+	to form our desired result.\\
+	Whe have: $\Sigma_2 \setminus \Sigma_1 = \set{d, e}$, and $Q^2 =
+	\set{(q_1, q_1), (q_1, q_2), (q_2, q_1), (q_2, q_2)}$.\\
+	If we make the scalar product of this two sets we obtain the following result:\\
+	$$R = \set{((q_1, q_1), d), ((q_1, q_2), e), ((q_2, q_1), d), ((q_2, q_2), e),
+	((q_1, q_1), e)}$$\\
+
+	\item
+	First of all we write down the domain, that is also the power set of
+	$\Sigma_1 \cap \Sigma_2$:
+	$$\mathcal{P}(\Sigma_1 \cap \Sigma_2) = \set{\emptyset, \set{b}, \set{c},
+	\set{b, c}}$$ and the codomain:
+	$$Q \times V = \set{(q_1, X), (q_1, Y), (q_1, Z), (q_2, X), (q_2, Y), (q_2, Z)}$$
+	An example for a total function could be:
+	$$f: \set{\emptyset \mapsto (q_1, X), \set{b} \mapsto (q_2, X), \set{c} \mapsto (q_2, Z), \set{b, c} \mapsto (q_1, Y)}$$\\
+
+	\item
+	We want to calculate how many partial functions $f: \Sigma_1 \cup \Sigma_2 \to_p V$
+	there are.\\
+	The domain of the function $f$ is: $$\Sigma_1 \cup \Sigma_2 =
+	\set{a, b, c, d, e}$$
+	and the codomain: $$V = \set{X, Y, Z}$$
+	Since we have 4 possible mappings for every element of the set (the 3 variables and the emptyset) $\Sigma_1 \cup \Sigma_2$, with cardinality $|\Sigma_1 \cup \Sigma_2| = 5$,
+	we have $4^5$ possible partial functions.
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercise \homeworkNumber.2}
+\begin{enumerate}[(a)]
+	\item
+	Just for clarity we write the set of all cells: $P = \set{(1,1), (1,2),
+	(2,1), \dots, (n,m)}$\\
+	In the given example we have: $n = 3$, $m = 2$, $C = \set{\text{White, Gray,
+	Black}}$ and the following function $f$:
+	$$
+	f(P_{3 \times 2}) :=
+	\begin{cases}
+		Grey & P = (1, 1)\\
+		Black & P = (3, 2)\\
+		White & else
+	\end{cases}
+	$$\\
+
+	\item
+	The cartesian product of $P \times P$ results in:
+	$$P^2 = \set{((1,1), (1,1)), ((1,1), (1,2)), \dots, ((n,m), (n,m))}$$
+	and therefore the relation $R$:
+	$$R = \set{(p, p') = ((x_p, y_p), (x_{p'}, y_{p'})) \mid f(p) \neq f(p'),\;
+	x_p = x_{p'} \text{ and } y_p = y_{p'} + 1}$$
+
+	R for concrete example in (a):
+	$$R = \set{((1,2), (1,1)), ((3,2), (3,1))}$$
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercise \homeworkNumber.3}
+The statement to prove is:
+$$(A \cup B) \subseteq (A \cap B) \text{, then } A \subseteq B$$
+\begin{enumerate}[(a)]
+	\item
+	\begin{proof}[Direct proof]
+		In a first step we take an $x \in (A \cup B)$. Because $A \cup B$ is a
+		subset of $A \cap B$, any $x \in A$ is always also element of $B$ and
+		vice versa, and therefore $A \subseteq B$.\\
+	\end{proof}
+
+	\item
+	\begin{proof}[Indirect proof]
+		Assumption: if $(A \cup B) \subseteq (A \cap B)$, then $A \nsubseteq B$\\
+		There must be an $x \in A \setminus B$, that is also element of $A \cup B$.
+		Because $(A \cup B) \subseteq (A \cap B)$ and $x \notin (A \cap B)$,
+		following the initial condition of our $x$, $x$ cannot be in $A$ which
+		is a contraddiction to our assumption.\\
+	\end{proof}
+
+	\item
+	\begin{proof}[Contrapositive]
+		We assume: if $A \nsubseteq B$, then $(A \cup B) \nsubseteq (A \cap B)$\\
+		Because of $A \nsubseteq B$, there must be an $x \in A \setminus B$ which
+		contradicts with $(A \cup B) \subseteq (A \cap B)$ because if $x \in A
+		\setminus B$, so also $x \in A \cup B$ but $x$ is not element of $A \cap B$.\\
+	\end{proof}
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercise \homeworkNumber.4}
+\begin{proof}
+	For $a \in \mathbb{R}$ and $a \neq 1$\\\\
+	\underline{Basis n = 0}:
+	$$
+	\sum_{i = 0}^{0} a^0 = a^0 = 1 \stackrel{!}{=} \frac{1 - a}{1 - a} = 1
+	$$
+	\underline{IH}:
+	$$
+	\sum_{i = 0}^{n} a^i = \frac{1 - a^{n + 1}}{1 - a} \qquad \forall n \in \mathbb{N}_0
+	$$
+	\underline{Inductive step n $\to$ n + 1}:
+	\begin{align*}
+		\sum_{i = 0}^{n + 1} a^i = \sum_{i = 0}^{n} a^i + a^{n + 1} &\stackrel{IH}{=} \frac{1 - a^{n + 1}}{1 - a} + a^{n + 1} \\
+			&= \frac{1 - a^{n + 1} + (1 - a)a^{n + 1}}{1 - a} \\
+			&= \frac{1 - a^{n + 1} + a^{n + 1} - a^{n + 2}}{1 - a} \\
+			&= \frac{1 - a^{n + 2}}{1 - a}
+	\end{align*}
+\end{proof}
+\end{document}
