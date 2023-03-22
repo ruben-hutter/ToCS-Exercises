@@ -69,31 +69,33 @@
 	
 \end{enumerate}
 
-\clearpage
-
 \section*{Exercise \homeworkNumber.2}
 \begin{enumerate}[(a)]
 	\item
-	To check if $G_1 = \left \langle \set{S, X, Y}, \set{a, b}, R_1, S \right \rangle$ is a regular
-	language we rewrite the rules set. In a first step we eliminate the start variable from the
-	right-hand side of $R_1$ and in a second step we eliminate forbidden occurrences of $\epsilon$ and
-	obtain:
-	$$
-	R_1' = \set{S \to aX, \; S \to aS', \; S \to \epsilon, \; S' \to a, \; S' \to aX, \; S' \to aS', \;
-	X \to ba, \; X \to bX}
-	$$
-	So we see that this is a regular grammar and therefore of Type-3, and because of Type-3 also of
-	Type-$i \text{ for } i < 3$.
+	The grammar $G_1 = \left \langle \set{S, X, Y}, \set{a, b}, R_1, S \right \rangle$ is of type-0
+	because there is rule $S \to \epsilon$ and rule $S \to aS$ which violates the special case, where $S$
+	never occurs on the right-hand side if $S$ also maps to the empty word.
 
 	\item
-	To-Do
+	The grammar $G_2 = \left \langle \set{S, X, Y}, \set{a, b}, R_2, S \right \rangle$ is of type-1, and
+	so also of type-0, because $baX \to baaX$ is context-sensitive. The other rules are of type-2 or
+	type-3.
 
 \end{enumerate}
 
-\clearpage
-
 \section*{Exercise \homeworkNumber.3}
-
+The regular grammar for the given DFA is:
+$$
+G = \left \langle \set{S, U, V}, \; \set{a, b, c}, \; R, \; S \right \rangle
+$$
+with rules R as follows:
+\begin{center}
+	\begin{tabular}{ c c c }
+ 	$S \to aU$ & $S \to bV$ & $S \to c$ \\ 
+ 	$U \to aU$ & $U \to cS$ & $U \to c$ \\  
+ 	$V \to bV$ & $V \to cS$ & $V \to c$    
+	\end{tabular}
+\end{center}
 
 \clearpage
 
@@ -105,4 +107,14 @@
 	\end{figure}
 
 \section*{Exercise \homeworkNumber.5}
+\subsection*{Fist step}
+We find the complement of $G_2$ by inverting the corresponding DFA.
+
+\subsection*{Second step}
+Given the equivalence problem: $A = B \quad \text{iff} \quad (A \cap B^c) \cup (A^c \cap B) = \emptyset$
+which applies in both directions, we can extrapolate only the $(A \cap B^c)$ part in order to obtain $A \subseteq B \quad \text{iff} \quad (A \cap B^c) = \emptyset$. Because regular languages are closed under intersection and complement, and we know algorithms for these operations.
+
+\subsection*{Third step}
+Decide if $(A \cap B^c)$ is $\emptyset$ by using the algorithm for the emptiness problem $P_\emptyset$.
+
 \end{document}
