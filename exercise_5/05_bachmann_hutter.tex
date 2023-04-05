@@ -44,7 +44,7 @@
 \textbf{Step 1: $\epsilon$ Rules}\\
 $S \to \epsilon$ is the only occurrence of $\epsilon$ and $S$ never occurs on the right-hand side. We don't have to do anything here.\\\\
 \textbf{Step 2: Chain Rules}\\
-Since the CMS (WHAT DO YOU MEAN BY THAT??? $\to$ CNF?) can only have a terminal or \textbf{two} Variables on the right-hand side, we have to eliminate every Rule that has only a single Variable on the right.\\\\
+Since the CNF can only have a terminal or \textbf{two} Variables on the right-hand side, we have to eliminate every Rule that has only a single Variable on the right.\\\\
 Chains in $G$:
 $$S \to Z \to bb \qquad \qquad S \to Z \to Za \qquad \qquad X \to Y \to bY \qquad \qquad Y \to X \to aZb$$
 We eliminate the chains by linking the end result of the chain directly with the first Variable. Since $X \to Y$ and $Y \to X$, we can just write them together as $X$ that points to the results of $X$ and $Y$.
@@ -67,7 +67,7 @@ $$A \to a \qquad \qquad B \to b$$
 \begin{proof}
 Length of Derivations in Chomsky Normal Form:\\\\
 In the case $\vert w \vert = 1$ we can only have one terminal Rule $ S \to a $ because $ S \to AB $ would be replaced by at least two terminal rules and therefore be $\vert w \vert \geq 2$. \\\\
-With $ S \to AB $ we can generate any word $w$ with $\vert w \vert \geq 2$ in the language $G$ by replacing the $A$ and (NOT SURE IF OR WAS CORRECT!) $B$.
+With $ S \to AB $ we can generate any word $w$ with $\vert w \vert \geq 2$ in the language $G$ by replacing the $A$ and $B$.
 $$S \to AB \xrightarrow{(B \to CD)} ACD \xrightarrow{(D \to EF)} ACEF \to \dots \to X_1 \dots X_n$$
 By the definition of the Chomsky Normal Form, the Grammar has either a terminal or two Variables on the right-hand side. Therefore with every Step, exactly one Variable can be added.\\
 So to generate $X_1 \dots X_n$ exactly $n-1$ steps are needed.\\\\
@@ -100,12 +100,20 @@ In total we need exactly $2n-1$ steps and since $n = \vert w \vert$ the statemen
 	\end{tabular}
 	
 	\item
-	\end{enumerate}
 	This PDA accepts the following language: 
-	$w = \set{a^x \; d \; (ba)^y \; (cc)^z \mid a = y+z,\quad x,y,z \in \mathbb{N}_0}$\\
-	The self-loops $q_1$ and $q_2$ stack $a$'s. Then follows a single $d$ and the loop $q_3 \to q_4 \to q_3$ ($ab$) which removes anything stacked by $q_1$ followed by the loop $q_5 \to q_6 \to q_5$ ($cc$) which removes anything stacked by $q_2$. So in the end the visits of $q_1 + q_2$ have to equal the visits of $q_3 + q_5$.
+	$w = \set{a^x \; d \; (ba)^y \; (cc)^z \mid x = y+z,\quad x,y,z \in \mathbb{N}_0}$\\
+	The self-loops $q_1$ and $q_2$ stack $a$'s. Then follows a single $d$ and the loop $q_3 \to q_4 \to
+	q_3$ ($ab$) which removes anything stacked by $q_1$ followed by the loop $q_5 \to q_6 \to q_5$
+	($cc$) which removes anything stacked by $q_2$.
+\end{enumerate}
 
 
 \section*{Exercise \homeworkNumber.4}
+\begin{enumerate}[(a)]
+\item
+The statement is false, as there exist context-free languages whose complements are also context-free. Context-free languages are not closed under complement.
+\item
+No, the language $L = \set{a^n b^n b^m a^m \mid n, m \in \mathbb{N}_0}$ is not context-free. This can be shown using the pumping lemma for context-free languages.
+\end{enumerate}
 
 \end{document}
