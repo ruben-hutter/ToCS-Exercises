@@ -1,0 +1,85 @@
+%% General definitions
+\documentclass{article} %% Determines the general format.
+\usepackage{a4wide} %% paper size: A4.
+\usepackage[utf8]{inputenc} %% This file is written in UTF-8.
+%% Some editors on Windows cannot save files in UTF-8.
+%% If there is a problem with special characters not showing up
+%% correctly, try switching "utf8" to "latin1" (ISO 8859-1).
+\usepackage[T1]{fontenc} %% Format of hte resulting PDF file.
+\usepackage{fancyhdr} %% Package to create a header on each page.
+\usepackage{lastpage} %% Used for "Page X of Y" in the header.
+											%% For this to work, you have to call pdflatex twice.
+\usepackage{enumerate} %% Used to change the style of enumerations (see below).
+
+\usepackage{amssymb} %% Definitions for math symbols.
+\usepackage{amsmath} %% Definitions for math symbols.
+\usepackage{amsthm}
+\usepackage{braket}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+\usepackage{tikz}  %% Pagacke to create graphics (graphs, automata, etc.)
+\usetikzlibrary{automata} %% Tikz library to draw automata
+\usetikzlibrary{arrows}   %% Tikz library for nicer arrow heads
+
+
+%% Left side of header
+\lhead{\course\\\semester\\Exercise \homeworkNumber}
+%% Right side of header
+\rhead{\authorname\\Page \thepage\ of \pageref{LastPage}}
+%% Height of header
+\usepackage[headheight=36pt]{geometry}
+%% Page style that uses the header
+\pagestyle{fancy}
+
+\newcommand{\authorname}{Nico Bachmann\\Ruben Hutter}
+\newcommand{\semester}{Spring semester 2023}
+\newcommand{\course}{Theory of Computer Science}
+\newcommand{\homeworkNumber}{6}
+
+
+\begin{document}
+
+\section*{Exercise \homeworkNumber.1}
+We encounter the problem that we want to force an $A$ to be on top of the stack but at the same time not pop $A$.
+To work around this, we can add a second transition controlling the $A$.\\
+It would look like this:\\\\
+1. transition $q_0 \to q_1$:\quad $\epsilon, A \to A$\\
+2. transition $q_1 \to q_2$: \quad $c, \epsilon, B$\\\\
+In the first transition we force an $A$ to be on top of the stack by popping it, but then pushing it right back. Then in the second transition we process the $c$ from the input word and add the $B$
+
+
+\section*{Exercise \homeworkNumber.2}
+
+\begin{enumerate}[(a)]
+\item
+To simulate a multi-tape TM we need to place all $k$ tapes on one single tape. In order to keep track of our different tapes, we introduce a new symbol that acts as a delimiter to separate our tapes. This can be any symbol that is not in the alphabet and it must only be used as delimiter and nothing else. In this case we use $\#$ as delimiter.\\\\
+Now that we have separated our tapes we still need to figure out a way to keep track of the different tape-heads. We again introduce a new symbol $\dot{z}$ to our alphabet $\Gamma'$ where $z \in \Gamma$. This new symbol marks the cells where a tape head is. \\\\
+Ich han eifach das hier gmacht... verstand ned genau was sie überhaupt vo eus wott :/ \\
+\href{https://www.youtube.com/watch?v=g8b-cPEZGy4}{https://www.youtube.com/watch?v=g8b-cPEZGy4}\\\\
+
+
+
+\item
+The Head is again on the first position either when any transition has been completed or when the head got moved there by a "L" transition from the second cell ?? \\\\
+Ke plan was hier d'frog isch????
+
+\item
+When we're supposed to move right but we're on the last cell of that "tape" (there is a $\#$ next), then we have to shift all the cells from our tape-head to the last cell one step to the right.\\\\
+Idk das stoht ja scho ide Frag? Isch mer ned ganz klar was sie hier wend?
+
+
+\end{enumerate}
+
+\clearpage
+
+\section*{Exercise \homeworkNumber.3}
+
+
+\section*{Exercise \homeworkNumber.4}
+
+
+\section*{Exercise \homeworkNumber.5}
+
+\end{document}
