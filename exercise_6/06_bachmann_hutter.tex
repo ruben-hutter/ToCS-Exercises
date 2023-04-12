@@ -54,31 +54,110 @@ In the first transition we force an $A$ to be on top of the stack by popping it,
 
 \begin{enumerate}[(a)]
 \item
-To simulate a multi-tape TM we need to place all $k$ tapes on one single tape. In order to keep track of our different tapes, we introduce a new symbol that acts as a delimiter to separate our tapes. This can be any symbol that is not in the alphabet and it must only be used as delimiter and nothing else. In this case we use $\#$ as delimiter.\\\\
-Now that we have separated our tapes we still need to figure out a way to keep track of the different tape-heads. We again introduce a new symbol $\dot{z}$ to our alphabet $\Gamma'$ where $z \in \Gamma$. This new symbol marks the cells where a tape head is. \\\\
-Ich han eifach das hier gmacht... verstand ned genau was sie überhaupt vo eus wott :/ \\
-\href{https://www.youtube.com/watch?v=g8b-cPEZGy4}{https://www.youtube.com/watch?v=g8b-cPEZGy4}\\\\
-
-
+First we have to introduce two new characters to the alphabet. The $\#$ will be used as delimiter between the different tapes and the $\dot{z}$ where $z \in \Gamma$ is used to save the positions of the different tape-heads on our single tape. With those new characters we can then construct our single tape as follows:
+\begin{enumerate}[1.]
+\item Move head to the left and write $\#$.
+\item Move head to the right and mark the current character with a dot.
+\item Move head to the right until a $\square$ is reached and write $\#$,
+\item Move head to the right and write a dotted square: $\dot{\square}$
+\item Move head to the right and repeat steps 3 and 4 (k-2)-times.
+\item Move head all the way to the left (to the first $\#$)
+\end{enumerate}
 
 \item
-The Head is again on the first position either when any transition has been completed or when the head got moved there by a "L" transition from the second cell ?? \\\\
-Ke plan was hier d'frog isch????
-
+Here we're scanning from the left-most to the (k+1)st $\#$ to determine what symbols are under virtual heads. To do that:
+\begin{enumerate}[1.]
+\item Move head to the right until an arbitrary dotted symbol $\dot{z}$ is read.
+\item "Go" to that symbols state: $q_{\langle z_1 \rangle}$
+\item Repeat step 1 and 2 until the (k+1)st $\#$ is read (end of last tape is reached). The state is now: $q_{\langle z_1, z_2, \dots, z_k \rangle}$
+\item Move all the way back to the leftmost symbol. (Note that it would be more efficient to already process the transitions on the way back instead of going back and then go over the tape a third time.)
+\end{enumerate}
+\clearpage
 \item
-When we're supposed to move right but we're on the last cell of that "tape" (there is a $\#$ next), then we have to shift all the cells from our tape-head to the last cell one step to the right.\\\\
-Idk das stoht ja scho ide Frag? Isch mer ned ganz klar was sie hier wend?
-
+We're supposed to write a $\square$ to the right of us. However to the right there is a $\#$ marking the end of that "tape". We now have to right-shift everything from our current position to the end of the tape to make space for the $\square$. To do this:
+\begin{enumerate}[1.]
+\item Move right (to the $\#$) and replace with a new symbol $\$$ to mark the location where the $\square$ should be put later.
+\item Move all the way to the right until the (k+1)st $\#$ is read. (end of tape)
+\item Read current arbitrary symbol $z$ move right and write $z$
+\item Move left twice
+\item Repeat step 3 and 4 until the $\$$ is read.
+\item Replace the $\$$ the $\square$ and move right.
+\item write $\#$.
+\item move left twice.
+\end{enumerate}
 
 \end{enumerate}
 
 \clearpage
 
+
+
+
 \section*{Exercise \homeworkNumber.3}
+\clearpage
+
+
 
 
 \section*{Exercise \homeworkNumber.4}
+\begin{enumerate}[(a)]
+\item
+Encode the rules with the encoding:\\\\
 
+\begin{tabular}{ l | l | l }
+states & characters & directions\\
+\hline
+$ q_0 = bin(0) = 00 $ & $ \square = bin(2) = 10 $ & $ L = bin(0) = 00 $\\
+$ q_{accept} = bin(1) = 01 $ & $ 0 = bin(0) = 00 $ & $ R = bin(1) = 01 $\\
+$ q_{reject} = bin(2) = 10 $ & $ 1 = bin(1) = 01 $ & \\
+\end{tabular}\\\\\\
+
+and we end up with the following:\\\\
+
+\begin{tabular}{ l | l }
+rules & \#\# "from" \# "to" \# "read" \# "write" \# "move"\\
+\hline
+$(q_0 \to q_{accept}) = \square \to \square, L $ & \#\# 0 \# 1 \# 10 \# 10 \# 0\\
+$(q_0 \to q_{reject}) = 0 \to 1, R $ & \#\# 0 \# 10 \# 0 \# 1 \# 1\\
+$(q_0 \to q_{reject}) = 1 \to 0, L $ & \#\# 0 \# 10 \# 1 \# 0 \# 0\\\\
+\end{tabular}\\\\\\ 
+
+Now we transform our new words (rules) over \{0, 1\} with the mapping:\\
+$0 \to 00 \qquad \qquad 1 \to 01 \qquad \qquad \# \to 11$\\\\
+to:\\
+1111 00 11 01 11 0100 11 0100 11 00\\
+1111 00 11 0100 11 00 11 01 11 01\\
+1111 00 11 0100 11 01 11 00 11 00\\\\
+
+and then chain them together in an arbitrary order:\\
+11110011011101001101001100 111100110100110011011101 111100110100110111001100\\
+and have successfully encoded the given turing machine in a word over \{0, 1\}.
+
+\clearpage
+
+\item
+To decode $w$ we have to reverse the steps from (a).
+
+\begin{enumerate}[1.]
+\item split at the $\#\#$ and $\#$ separator encoded as 1111 or 11:\\\\
+1111 00 11 00 11 00 11 00 11 01 \\
+1111 00 11 01 11 01 11 01 11 01 \\
+1111 00 11 0100 11 0100 11 00 11 01 \\
+
+\item decode the character pairs back to their integer values:\\\\
+\#\# 0 \# 0 \# 0 \# 0 \# 1 \\
+\#\# 0 \# 1 \# 1 \# 1 \# 1 \\
+\#\# 0 \# 10 \# 10 \# 0 \# 1 \\
+
+\item decode the integer values back to their characters:\\\\
+$q_0 \to q_0 = 0 \to 0, R$\\
+$q_0 \to q_{accept} = 1 \to 1, R$\\
+$q_0 \to q_{reject} = \square \to \square, R$\\\\
+
+<<INSERT PICTURE OF JFLAP HERE>>
+
+\end{enumerate}
+\end{enumerate}
 
 \section*{Exercise \homeworkNumber.5}
 
