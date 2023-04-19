@@ -46,7 +46,7 @@ We encounter the problem that we want to force an $A$ to be on top of the stack 
 To work around this, we can add a second transition controlling the $A$.\\
 It would look like this:\\\\
 1. transition $q_0 \to q_1$:\quad $\epsilon, A \to A$\\
-2. transition $q_1 \to q_2$: \quad $c, \epsilon, B$\\\\
+2. transition $q_1 \to q_2$: \quad $c, \epsilon \to B$\\\\
 In the first transition we force an $A$ to be on top of the stack by popping it, but then pushing it right back. Then in the second transition we process the $c$ from the input word and add the $B$
 
 
@@ -56,7 +56,7 @@ In the first transition we force an $A$ to be on top of the stack by popping it,
 \item
 First we have to introduce two new characters to the alphabet. The $\#$ will be used as delimiter between the different tapes and the $\dot{z}$ where $z \in \Gamma$ is used to save the positions of the different tape-heads on our single tape. With those new characters we can then construct our single tape as follows:
 \begin{enumerate}[1.]
-\item Move head to the left and write $\#$.
+\item Move head to the left and write $\#$. (in case it's not allowed to go left, you should shift everything to the right as in 2c) so that you can then write $\#$ all the way to the left.
 \item Move head to the right and mark the current character with a dot.
 \item Move head to the right until a $\square$ is reached and write $\#$,
 \item Move head to the right and write a dotted square: $\dot{\square}$
@@ -70,18 +70,19 @@ Here we're scanning from the left-most to the (k+1)st $\#$ to determine what sym
 \item Move head to the right until an arbitrary dotted symbol $\dot{z}$ is read.
 \item "Go" to that symbols state: $q_{\langle z_1 \rangle}$
 \item Repeat step 1 and 2 until the (k+1)st $\#$ is read (end of last tape is reached). The state is now: $q_{\langle z_1, z_2, \dots, z_k \rangle}$
-\item Move all the way back to the leftmost symbol. (Note that it would be more efficient to already process the transitions on the way back instead of going back and then go over the tape a third time.)
+\item Move all the way back to the leftmost symbol.
 \end{enumerate}
+(Note that it would be more efficient to already process the transitions on the way back instead of going back and then go over the tape a third time.)
 \clearpage
 \item
-We're supposed to write a $\square$ to the right of us. However to the right there is a $\#$ marking the end of that "tape". We now have to right-shift everything from our current position to the end of the tape to make space for the $\square$. To do this:
+We're supposed to write a $\square$ to the right of the current head position. However to the right there is a $\#$ marking the end of that "tape". We now have to right-shift everything from our current position to the end of the tape to make space for the $\square$. To do this:
 \begin{enumerate}[1.]
 \item Move right (to the $\#$) and replace with a new symbol $\$$ to mark the location where the $\square$ should be put later.
 \item Move all the way to the right until the (k+1)st $\#$ is read. (end of tape)
 \item Read current arbitrary symbol $z$ move right and write $z$
 \item Move left twice
 \item Repeat step 3 and 4 until the $\$$ is read.
-\item Replace the $\$$ the $\square$ and move right.
+\item Replace the $\$$ with $\square$ and move right.
 \item write $\#$.
 \item move left twice.
 \end{enumerate}
@@ -144,7 +145,7 @@ to:\\
 
 and then chain them together in an arbitrary order:\\
 11110011011101001101001100 111100110100110011011101 111100110100110111001100\\
-and have successfully encoded the given turing machine in a word over \{0, 1\}.
+and have successfully encoded the given Turing machine in a word over \{0, 1\}.
 
 \clearpage
 
@@ -167,7 +168,10 @@ $q_0 \to q_0 = 0 \to 0, R$\\
 $q_0 \to q_{accept} = 1 \to 1, R$\\
 $q_0 \to q_{reject} = \square \to \square, R$\\\\
 
-<<INSERT PICTURE OF JFLAP HERE>>
+\begin{figure}[H]
+		\includegraphics[scale=0.45]{ex4b.png}
+		\centering
+\end{figure}
 
 \end{enumerate}
 \end{enumerate}
@@ -177,7 +181,6 @@ $q_0 \to q_{reject} = \square \to \square, R$\\\\
 \item False because a language $L$ is Turing-decidable, iff both $L$ and $\bar{L}$ are Turing-recognizable. However type-2 languages are not closed under complement so $\bar{L}$ does not have to be of type-2 and therefore also doesn't have to be Turing-recognizable. And if that's the case, $L$ is not Turing-decidable which contradicts the given statement.
 
 \item True because if a language $L$ is Turing-decidable, $L$ and $\bar{L}$ both have to be Turing-recognizable and therefore be of type-0. And because they have to be type-0, they also need to have a grammar.
-<<GLAUBE ICH ZUMINDEST...>>
 \end{enumerate}
 
 \end{document}
