@@ -95,18 +95,18 @@ We're supposed to write a $\square$ to the right of us. However to the right the
 
 \section*{Exercise \homeworkNumber.3}
 
-\begin{enumerate}
+\begin{enumerate}[(a)]
 \item
 Since Turing-recognizable languages are exactly the type-0 languages (slide B12, page 11), we know that the language $L$ recognized by our given DTM $M$ must be of type-0. However type-0 languages are not closed under complement. Meaning that the complement of a type-0 language does not need to be of type-0.\\
 Now since $\bar{L}$ doesn't have to be of type-0, the DTM $M'$ would need to be able to recognize languages that are not type-0. This is not possible!
 
 \item
+Let state 1 be the accept state.
+Let $M_1$ have only a single transition that goes from state 0 to state 1 by consuming a $0$ and going left.\\
+Then let $M_2$ also have only a single transition that goes from state 0 to state 1 by consuming a $1$ but now going right.\\\\
+$M_1$ and $M_2$ both accept the word $0$ but are not equal as they go in different directions and are therefore not a "pair".
 
-Since NTM's and DTM's recognize the same languages (slide B12, page 11), again, the languages $L_1, L_2$ recognized by our two NTM's $M_1, M_2$ have to be of type-0.\\
-
-<<SEHR WAHRSCHIINLICH NUR ZUM TEIL KORREKT...>>\\
-Type-0 languages are closed under union, so our "product NTM$_{1,2}$" should be able to recognize $L_1 \cap L_2$.\\
-However the question suggests to "connect" $M_1$ and $M_2$ at every transition pair. To unify two languages though we only connect the starting states. << so isches zumindest bi regular languages xd...
+Our given "product" $M_{1,2}$ then does not include this transition and does not accept $0$. Which contradicts the statement in the question.
 \end{enumerate}
 
 \clearpage
