@@ -57,22 +57,22 @@ $$
 Read hints
 
 \section*{Exercise \homeworkNumber.3}
-To show that the composition $(f \circ g) : \Sigma_1^* \to \Sigma_2^*$ is Turing-computable, we can build a TM that simulates the computations of f and g sequentially. This TM would work as follows:
+To show that the composition $(f \circ g) : \Sigma_1^* \to \Sigma_2^*$ is Turing-computable, we can build a TM that simulates the computations of $f$ and $g$ sequentially. This TM would work as follows:
 \begin{enumerate}
 \item
-Start the TM with the input $x$
+Start the TM with the input $x$.
 \item
-Use a Turing machine that simulates the computation of $g$ on $x$. If $g(x)$ is undefined, then halt and output "undefined".
+Use a Turing machine that simulates the computation of $g$ on $x$. If $g(x)$ is undefined, then halt and output \textit{undefined}.
 \item
-Use a Turing machine that simulates the computation of $f$ on $g(x)$. If $f(g(x))$ is undefined, then halt and output "undefined"
+Use a Turing machine that simulates the computation of $f$ on $g(x)$. If $f(g(x))$ is undefined, then halt and output \textit{undefined}.
+\item
+If $f(g(x))$ is defined, output it as the result of the composition.
 \end{enumerate}
-
-If g(x) is undefined -> undefined
-\clearpage
-
+Since we assume that $f$ and $g$ are Turing-computable, we know that there exist Turing machines that can compute $f$ and $g$ respectively. Therefore, we can construct a Turing machine that combines the computations of these two machines, and this new machine can compute the composition of $f$ and $g$ for any input. Therefore, we have shown that the composition of two Turing-computable partial functions is also Turing-computable.
 
 \section*{Exercise \homeworkNumber.4}
-
+Let $w$ be an arbitrary string in $A$. Since $A$ is a subset of $B$, we know that $w$ is also in $B$. Similarly, since $B$ is a subset of $C$, we know that $w$ is also in $C$. Therefore, $w$ is in $A$ and in $C$, which implies that $A$ is a subset of $C$, or $A \le C$.\\
+Thus, we have shown that if $A \le B$ and $B \le C$, then $A \le C$ for any languages $A, B, and C$. This is a result of the transitive property of set inclusion.
 
 \section*{Exercise \homeworkNumber.5}
 
