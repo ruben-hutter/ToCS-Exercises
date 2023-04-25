@@ -54,7 +54,23 @@ $$
 \end{enumerate}
 
 \section*{Exercise \homeworkNumber.2}
-Read hints
+\begin{enumerate}[Step 1.]
+\item
+Check if $n_2 = 0$: if \textbf{true} write $n_1 = 1$, remove $n_2, n_3$ from tape and terminate.
+\item
+Check if $n_2 = 1$: if \textbf{true} remove $n_2, n_3$ from tape and terminate.
+\item
+Copy $n_1$ to $n_3$.
+\item
+$M_{pred_1}(n_2)$.
+\item
+$M_{mul}(n_1, n_3)$ and write result to $n_1$.
+\item
+Check if $n_2 = 1$: if \textbf{true} remove $n_2, n_3$ from tape and terminate.
+\item
+Jump to Step 4.
+
+\end{enumerate}
 
 \section*{Exercise \homeworkNumber.3}
 To show that the composition $(f \circ g) : \Sigma_1^* \to \Sigma_2^*$ is Turing-computable, we can build a TM that simulates the computations of $f$ and $g$ sequentially. This TM would work as follows:
@@ -72,7 +88,7 @@ Since we assume that $f$ and $g$ are Turing-computable, we know that there exist
 
 \section*{Exercise \homeworkNumber.4}
 Let $w$ be an arbitrary string in $A$. Since $A$ is a subset of $B$, we know that $w$ is also in $B$. Similarly, since $B$ is a subset of $C$, we know that $w$ is also in $C$. Therefore, $w$ is in $A$ and in $C$, which implies that $A$ is a subset of $C$, or $A \le C$.\\
-Thus, we have shown that if $A \le B$ and $B \le C$, then $A \le C$ for any languages $A, B, and C$. This is a result of the transitive property of set inclusion.
+Thus, we have shown that if $A \le B$ and $B \le C$, then $A \le C$ for any languages $A, B$ and $C$. This is a result of the transitive property of set inclusion.
 
 \section*{Exercise \homeworkNumber.5}
 
