@@ -18,6 +18,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 \usepackage{tikz}  %% Pagacke to create graphics (graphs, automata, etc.)
 \usetikzlibrary{automata} %% Tikz library to draw automata
@@ -43,16 +45,14 @@
 
 \section*{Exercise \homeworkNumber.1}
 
-KEI PLAN WAS SIE MIT SET $S$ MEINT...
-
 \begin{enumerate}[(a)]
-\item Let $M_1$ be a TM that is undefined on input $0$ and $M_2$ be another TM that is defined on input $0$. Let both TM's compute an unary function over $\mathbb{N}$. The Rice theorem tells us that it's impossible to write a general algorithm that decides whether a given TM has a property or not except if the property is always true or false. Since $M_1$ and $M_2$ are two TM's that behave differently, the property of $0$ being undefined is not always true or false and therefore the language L is undecidable.\\
+\item $S = \set{f \mid f \text{ is undefined for input } 0}$
 
-\item Let $M_1$ be a TM that rejects every input and $M_2$ be another TM that accepts every input. Both TM's obviously behave differently and are therefore undecidable using the Rice theorem\\
+\item $S = \set{f \mid f \text{ is a total function and computable}}$
 
-\item L is decidable because if it halts on an even number of steps for input 0, it always halts on an even number of steps. (KEI PLAN WIESO... CHATGPT)\\
+\item There exists a TM that accepts the same language as a another TM but one halts on an even number of steps while the other on an uneven number of steps.
 
-\item L is decidable because we can "simply" compute possible pairs of input and compare them with the output. (EBEFALLS CHATGPT. MACHT IRGENDWIE HALBWEGS SINN??\\
+\item $S = \lbrace f \mid f$ computes the binary multiplication function mul: $\mathbb{N}_0^2 \to \mathbb{N}_0 \text{ with mul(x, y) = x * y} \rbrace$
 \end{enumerate}
 
 \section*{Exercise \homeworkNumber.2}
@@ -67,15 +67,44 @@ Now Rice theorem tells us that every non-trivial property of a language is undec
 
 \section*{Exercise \homeworkNumber.3}
 \begin{enumerate}[(a)]
-\item 
+\item
+A non-deterministic algorithm for the Hitting Set problem is as follows:
 
+\begin{algorithm}
+\caption{Non-deterministic Algorithm for HittingSet (short version)}
+\begin{algorithmic}[1]
+\STATE Choose a set H of size at most $k$ non-deterministically.
+\FOR{each set $S_i \in S$}
+	\STATE Check whether $S_i \cap H$ is non-empty.
+	\IF{$S_i \cap H$ is empty}
+		\STATE Reject the instance.
+	\ENDIF
+\ENDFOR
+\STATE Accept the instance.
+\end{algorithmic}
+\end{algorithm}
+
+The algorithm runs in polynomial time because each non-deterministic choice can be made in polynomial time. The size of the input is proportional to the size of the set U and the number of sets in S, so the runtime is polynomial in the size of the input.
+
+The algorithm is correct because if there exists a hitting set of size at most k, then the algorithm will accept the instance. If there does not exist a hitting set of size at most k, then the algorithm will reject the instance for any choice of H of size at most k. Therefore, the algorithm correctly decides the decision version of the Hitting Set problem.
 
 \item
+\begin{algorithm}
+\caption{Deterministic Algorithm for HittingSet (short version) xD}
+\begin{algorithmic}[1]
+\FOR{each $H' \in$ all possible subsets of $U$ with $|H'| \leq k$}
+    \STATE Check if $S_i \cap H' \neq \emptyset$ for all $Si \in S$.
+    \RETURN True
+\ENDFOR
+\RETURN False
+\end{algorithmic}
+\end{algorithm}
+
 \end{enumerate}
 
 \section*{Exercise \homeworkNumber.4}
 \begin{enumerate}[(a)]
-\item $n^3$ will dominate as $n$ gets larger. Therefore the runtime of X is bound to a polynomial function and we can conclude that problem X is part of P.
+\item $n^3$ will dominate as $n$ gets larger. Therefore the runtime of X is bound to a polynomial function and we can conclude that X is a P problem.
 \item The runtime of $n^{log_2(n)}$ grows faster than any polynomial function because the exponent is not constant and grows with the size of n. We cannot conclude that X is in P for that reason.
 \end{enumerate}
 
