@@ -56,11 +56,20 @@ KEI PLAN WAS SIE MIT SET $S$ MEINT...
 \end{enumerate}
 
 \section*{Exercise \homeworkNumber.2}
+Since there exist functions to transform a given type-0 grammar to a DTM and vice versa, we can look at the problem from a DTM perspective.\\
+Let $S = \lbrace L(M) \vert L(M) = \emptyset \rbrace$ be the set of languages that contains all languages of TM's that have an empty language.\\
 
+Let $M_1$ be a DTM with $L(M_1) = \emptyset$. For example $M_1$ could reject every input immediately. Then let $M_2$ be a DTM with $L(M_2) \neq \emptyset$. For example $M_2$ could accept a single string.\\
+
+In this case, $L(M_1) \in S$ but $L(M_2) \notin S$ and we see that S is a non-trivial property of Turing Machine languages.\\
+
+Now Rice theorem tells us that every non-trivial property of a language is undecidable and because there exist functions to transform from a DTM to a type-0 grammar, we can apply this result also for the type 0 grammars. Therefore $EMPTINESS$ is in fact undecidable.
 
 \section*{Exercise \homeworkNumber.3}
 \begin{enumerate}[(a)]
-\item
+\item 
+
+
 \item
 \end{enumerate}
 
